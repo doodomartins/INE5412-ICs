@@ -28,19 +28,21 @@ int main ()
          cout << "Child process " << getpid() << ": Running" << endl;
          count++;
          /* Sleep for 1 second */
-         sleep(2);
+         sleep(1);
          cout << "Child process " << getpid() << ": Exiting with status " << count << endl;
          /*Faz com que todos processos que são filhos acabem aqui.*/
-         exit(count);
+         return count;
       }
    }
+
 
    /* if this is the parent-process then */
    cout << "Parent process " << getpid() << ": Waiting children to exit" << endl;
    int errno, status, sum = 0;
    /* Parent-process waits for all children to exit, adding each status to the sum variable */
-   /* O primeiro parametro é 0 pois estou fazendo o waitpid() em todos os processos filhos.*/
-   while(waitpid(0, &status, 0) != -1){
+   /* O primeiro parametro é 0 pois estou fazendo o waitpid() em todos os processos filhos. */
+   
+   while(waitpid(0, &status, ECHILD) != -1){
       sum += WEXITSTATUS(status);
    }
 
