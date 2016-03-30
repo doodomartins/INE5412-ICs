@@ -18,8 +18,8 @@ int main ()
       pid = fork();
       /* If there was an error on duplication then */
       if(pid < 0){
-            cout << "Error on fork()" << endl;
-            return -1;
+          cout << "Error on fork()" << endl;
+          return -1;
       }
       /* If child-process is running then */
       if(pid == 0){
